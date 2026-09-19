@@ -1,0 +1,114 @@
+/* ============================================================
+ * palette.css — 原始色值层（Design Token 第一层）
+ *
+ * 职责：只定义原始色值，不做任何语义命名外的假设。
+ * 约束：组件与 theme.css 一律只准引用语义变量（--surface-* / --text-* /
+ *       --status-* / --accent-* / --border-* / --shadow-*）。
+ *       —— 组件里出现 # 开头色值即视为违规（见 scripts/check-hardcoded-colors.js）。
+ *
+ * 新增色值流程：先在此层登记 → 再到 theme.css 挂语义 → 组件才可引用。
+ * ============================================================ */
+:root {
+  /* ---- 背景灰阶（由深到浅） ---- */
+  --pal-bg-0: #0E1518;   /* 窗口最底 */
+  --pal-bg-1: #11181C;   /* 菜单栏 */
+  --pal-bg-2: #141C21;   /* 一级面板 */
+  --pal-bg-3: #1A2329;   /* 二级面板 / 输入框底 */
+  --pal-bg-4: #1E2A30;   /* 激活输入框底 */
+  --pal-bg-5: #2A3840;   /* 提升层 / 边框 / 弹层 */
+  --pal-bg-6: #0D1117;   /* 树节点选中底（GitHub 深色系） */
+  --pal-bg-7: #094771;   /* 选中蓝底 */
+  --pal-bg-8: #3D4A52;   /* 次级面板（侧栏分区底） */
+  --pal-bg-9: #3A4A54;   /* 标签底（面板 Tab） */
+  --pal-bg-10: #5A6A74;  /* 条目底（面板条目） */
+  --pal-bg-11: #252536;  /* 编辑器辅助区（断点/行号） */
+  --pal-bg-12: #3D3D52;  /* 调试面板底 */
+  --pal-bg-13: #3A4E58;  /* 悬停提升（滚动条 hover） */
+  --pal-bg-14: #1A2A3A;  /* 大纲选中详情底 */
+  --pal-bg-15: #2A3A52;  /* 大纲高亮底 */
+
+  /* ---- 代码符号色（大纲视图） ---- */
+  --pal-sym-func: #DCDCAA;   /* 函数/类名 */
+  --pal-sym-var: #4EC9B0;    /* 变量/常量 */
+  --pal-sym-param: #D69D85;  /* 参数 */
+
+  /* ---- 错误徽章（红棕系） ---- */
+  --pal-err-badge-1: #2A1A1A;
+  --pal-err-badge-border-1: #3D2828;
+  --pal-err-badge-2: #3D2020;
+  --pal-err-badge-border-2: #4A3030;
+
+  /* ---- 标记 ---- */
+  --pal-cjk-border: rgba(144, 238, 144, 0.3); /* 中文汉字标记框 */
+
+  /* ---- 批4 ---- */
+  --pal-bg-16: #4A5A68;          /* 未选中终端卡边框（灰蓝） */
+  --pal-info-hover: #4A8EC4;     /* 主按钮 hover */
+  --pal-warn-strong: #F39C12;    /* 搜索匹配徽章（深橙） */
+  --pal-ok-badge: #1a3a1a;       /* 状态徽章绿底 */
+  --pal-ok-badge-border: #2a5a2a;/* 状态徽章绿边 */
+  --pal-err-badge-3: #3a1a1a;    /* 状态徽章红底（柔） */
+  --pal-err-badge-border-3: #5a2a2a; /* 状态徽章红边（柔） */
+
+  /* ---- 批5 ---- */
+  --pal-bg-17: #1E2A31;  /* 输入区底 */
+  --pal-bg-18: #3A4A54;  /* 输入区边 */
+  --pal-bg-19: #1A242A;  /* 内嵌底 */
+  --pal-bg-20: #1B242A;  /* 阶段条底 */
+  --pal-bg-21: #202A31;  /* 表头底 */
+  --pal-bg-22: #35474F;  /* 标签底 */
+  --pal-bg-23: #3A4A52;  /* AST 节点边 */
+  --pal-bg-24: #232F37;  /* 树选中节点底 */
+  --pal-bg-25: #3A3A3A;  /* 工具栏底 */
+  --pal-bg-26: #4A4A4A;  /* 工具栏 hover */
+  --pal-bg-27: #1E2A30;  /* 翻译插件底 */
+  --pal-bg-28: #232A2E;  /* 树节点 hover */
+  --pal-text-12: #5A6A74; /* agent 次级信息 */
+  --pal-text-13: #D4D4D4; /* 卡片标题浅灰 */
+  --pal-text-14: #8A9499; /* 卡片描述灰蓝 */
+  --pal-text-15: #6B7277; /* 元信息灰 */
+  --pal-text-16: #808080; /* 树图标灰 */
+  --pal-status-paused: #E4D48F;   /* 暂停/取消金 */
+  --pal-status-failed: #EA6668;   /* 链路失败红 */
+  --pal-status-pending: #8BC8EA;  /* 待处理浅蓝 */
+  --pal-sym-interface: #C586C0;   /* 接口紫 */
+  --pal-sym-import: #9CDCFE;      /* 导入浅蓝 */
+  --pal-sym-field: #6A9955;       /* 字段绿 */
+  --pal-warn-badge-1: #4A3020;        /* 警告徽章底 */
+  --pal-warn-badge-border-1: #6A4A30; /* 警告徽章边 */
+  --pal-warn-badge-2: #5A4030;        /* 警告徽章底强 */
+  --pal-warn-badge-border-2: #8A6A4A; /* 警告徽章边强 */
+  --pal-info-hover-2: #4A8CC6;        /* 主按钮 hover（次） */
+  --pal-info-2: #42A5F5;              /* 信息浅蓝（诊断） */
+  --pal-bg-29: #0A0F12;               /* 错误堆栈底 */
+
+  /* ---- 文字（亮 → 暗） ---- */
+  --pal-text-0: #E6F4F1; /* 主高亮文字 */
+  --pal-text-1: #FFFFFF; /* 反白 */
+  --pal-text-2: #CCCCCC; /* 正文 */
+  --pal-text-3: #B8C4CC; /* 状态栏文字 */
+  --pal-text-4: #C9D1D9; /* 强文字（GitHub 系） */
+  --pal-text-5: #7C8A92; /* 次要 */
+  --pal-text-6: #5A666E; /* 弱化 */
+  --pal-text-7: #8B949E; /* 弱化（GitHub 系） */
+  --pal-text-8: #3A4A4E; /* 禁用 */
+  --pal-text-9: #E8E8E8; /* 亮正文（面板标题/标签亮字） */
+  --pal-text-10: #8A8A9E; /* 次要灰紫（面板标签/图标） */
+  --pal-text-11: #6A7A82; /* 更弱灰（大纲符号弱色） */
+
+  /* ---- 强调 / 信息 ---- */
+  --pal-accent: #14A3C7;       /* 品牌强调青 */
+  --pal-info: #569CD6;         /* 信息蓝 */
+  --pal-info-strong: #0E639C;  /* 信息蓝深（聚焦边框） */
+  --pal-info-ring: #58A6FF;    /* 信息蓝亮（聚焦环） */
+
+  /* ---- 状态 ---- */
+  --pal-ok: #4CAF50;           /* 成功 */
+  --pal-warn: #FFB74D;         /* 警告 */
+  --pal-err: #EF5350;          /* 错误 */
+  --pal-err-strong: #E81123;   /* 错误深（关闭按钮底） */
+  --pal-heat-1: #F48771;       /* 状态灯-热1 */
+  --pal-heat-2: #FF9A84;       /* 状态灯-热2 */
+  --pal-heat-3: #D4A04A;       /* 状态灯-中 */
+  --pal-heat-4: #E8B85A;       /* 状态灯-中亮 */
+}

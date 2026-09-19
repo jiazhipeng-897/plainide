@@ -1,0 +1,4 @@
+{
+  "classify": "{\"success\":true,\"intent\":\"chat\"}",
+  "chatStream": "{\"invoke\":{\"success\":true},\"events\":[\"pipeline_started|\\\"chat\\\"\",\"chat_reply|\\\"\\\"\",\"pipeline_completed|\\\"chat\\\"\"]}"
+}

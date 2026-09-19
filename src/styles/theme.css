@@ -1,0 +1,219 @@
+/* ============================================================
+ * theme.css — 语义层（Design Token 第二层，组件唯一准用层）
+ *
+ * 组件内出现 # 开头色值即违规；rgba()/rgb() 同样视为硬编码。
+ * 只有本文件 + palette.css 允许直接书写色值。
+ *
+ * ┌─ ┌── 特例清单（≤10，超出必须重新审视档位表）────────────┐
+│ 1. AST 语法树节点色（#4A3020/#6A4A30/#3D3D52 等棕/紫/红系）已迁移 │
+│    为 --status-warn-badge 语义组，不再占用特例名额（2026-09 批5）│
+│ 2. Monaco tokenColors（#569CD6/#4EC9B0/#DCDCA A/          │
+│    #9CDCFE/#C586C0/#C792EA/#D4A04A/#6A9955 等）：           │
+│    第三方编辑器主题 · token-exempt: third-party          │
+│ 3. 字号 40/48px：agent.vue 离线大图标 / TranslateTab 空态      │
+│    大字 · scale-exempt: big-headings                       │
+│ 4. 间距 50/60/80px：个别布局特例（ErrorWindow 空态 /          │
+│    ASTTree 画布 / 折叠面板详情页）· scale-exempt: layout-outliers │
+│ 5. 间距 0.5px：CodeEditor 中文汉字标记框亚像素对齐              │
+│    · scale-exempt: cjk-char-frame                        │
+│ 6. 间距 -1px：SearchResults 边框贴合（消除双重边框）           │
+│    · scale-exempt: border-collapse                       │
+└──────────────────────────────────────────────────────────────┘└────────────────────────────────────────────────────────┘
+ *
+ * ┌─ 档位表 ────────────────────────────────────────────────┐
+ * │ 字号：10 辅助 / 11 小标注 / 12 次要 / 13 正文 / 14 强调  │
+ * │       16 小标题 / 18 大标题                             │
+ * │ 圆角：2 内嵌 / 4 小控件 / 6 默认卡片按钮 / 8 大卡片      │
+ * │       12 弹窗                                           │
+ * │ 间距：2 / 4 / 6 / 8 / 12 / 16 / 20 / 24 / 32 / 40       │
+ * │ 表外值一律不允许，特殊需求先登记特例清单再使用。        │
+ * └────────────────────────────────────────────────────────┘
+ * ============================================================ */
+@import './palette.css';
+
+:root {
+  /* ---- surface 语义（背景，全部经由 palette 引用，值零变化） ---- */
+  --surface-window: var(--pal-bg-0);   /* 窗口最底：TitleBar/StatusBar/MenuBar/全局 */
+  --surface-menu: var(--pal-bg-1);     /* 菜单栏专属 */
+  --surface-panel-1: var(--pal-bg-2);  /* 一级面板：文件树选中底 */
+  --surface-panel-2: var(--pal-bg-3);  /* 二级面板/输入框底：搜索框、树 hover */
+  --surface-input-active: var(--pal-bg-4); /* 激活输入框底 */
+  --surface-raised: var(--pal-bg-5);   /* 提升层：弹层/下拉/悬浮 */
+  --surface-tree-active: var(--pal-bg-6); /* 树节点选中底 */
+  --surface-selection: var(--pal-bg-7);   /* 选中蓝底 */
+  --surface-panel-3: var(--pal-bg-8);     /* 次级面板（侧栏分区底） */
+  --surface-tab: var(--pal-bg-9);         /* 标签底（面板 Tab） */
+  --surface-item: var(--pal-bg-10);       /* 条目底（面板条目） */
+  --surface-editor-aux: var(--pal-bg-11); /* 编辑器辅助区（断点/行号） */
+  --surface-debug: var(--pal-bg-12);      /* 调试面板底 */
+  --surface-field: var(--pal-bg-17);        /* 输入区底 */
+  --surface-inset: var(--pal-bg-19);        /* 内嵌底 */
+  --surface-panel-4: var(--pal-bg-20);      /* 阶段条底 */
+  --surface-panel-5: var(--pal-bg-21);      /* 表头底 */
+  --surface-tag: var(--pal-bg-22);          /* 标签底 */
+  --surface-node: var(--pal-bg-24);         /* 树选中节点底 */
+  --surface-toolbar: var(--pal-bg-25);      /* 工具栏底 */
+  --surface-toolbar-hover: var(--pal-bg-26);/* 工具栏 hover */
+  --surface-inset-2: var(--pal-bg-27);      /* 翻译插件底 */
+  --surface-tree-hover: var(--pal-bg-28);   /* 树节点 hover */
+  --surface-card: rgba(20, 28, 33, 0.9);    /* 悬浮卡片底 */
+  --surface-hover-2: var(--pal-bg-13);    /* 悬停提升（滚动条 hover） */
+  --surface-selected-soft: rgba(255, 255, 255, 0.06); /* 选中项柔底 */
+  --surface-detail: var(--pal-bg-14);   /* 大纲选中详情底 */
+  --surface-highlight: var(--pal-bg-15); /* 大纲高亮底 */
+
+  /* ---- text 语义 ---- */
+  --text-strong: var(--pal-text-0);    /* 高亮主文字（标题/强调项） */
+  --text-inverse: var(--pal-text-1);   /* 反白（选中态文字/按钮文字） */
+  --text-primary: var(--pal-text-2);   /* 正文 */
+  --text-status: var(--pal-text-3);    /* 状态栏文字 */
+  --text-strong-2: var(--pal-text-4);  /* 强文字（GitHub 系） */
+  --text-secondary: var(--pal-text-5); /* 次要说明 */
+  --text-muted: var(--pal-text-6);     /* 弱化/占位 */
+  --text-muted-2: var(--pal-text-7);   /* 弱化（GitHub 系） */
+  --text-disabled: var(--pal-text-8);  /* 禁用 */
+  --text-bright: var(--pal-text-9);    /* 亮正文（面板标题/标签亮字） */
+  --text-subtle: var(--pal-text-10);   /* 次要灰紫（面板标签/图标） */
+  --text-faint: var(--pal-text-11);    /* 更弱灰（大纲符号弱色） */
+  --text-quiet: var(--pal-text-12);    /* agent 次级信息 */
+  --text-soft: var(--pal-text-13);     /* 卡片标题浅灰 */
+  --text-desc: var(--pal-text-14);     /* 卡片描述灰蓝 */
+  --text-meta: var(--pal-text-15);     /* 元信息灰 */
+  --text-icon: var(--pal-text-16);     /* 树图标灰 */
+  --text-hero: var(--pal-text-0);      /* 品牌青白（高亮） */
+
+  /* ---- accent / info 语义 ---- */
+  --accent: var(--pal-accent);             /* 品牌强调青 */
+  --accent-soft-06: rgba(20, 163, 199, 0.06);
+  --accent-soft-30: rgba(20, 163, 199, 0.30);
+  --accent-soft-55: rgba(20, 163, 199, 0.55);
+  --info: var(--pal-info);                 /* 信息蓝（聚焦边框/语法强调） */
+  --info-strong: var(--pal-info-strong);   /* 聚焦边框深 */
+  --info-ring: var(--pal-info-ring);       /* 聚焦环亮 */
+  --info-glow: rgba(86, 156, 214, 0.05);   /* 信息蓝微光 */
+  --info-soft: rgba(86, 156, 214, 0.12);   /* 信息蓝柔底 */
+  --info-subtle: rgba(86, 156, 214, 0.15); /* 信息蓝淡底 */
+  --info-ring-soft: rgba(88, 166, 255, 0.15); /* 聚焦环柔 */
+  --info-hover: var(--pal-info-hover);     /* 主按钮 hover */
+
+  /* ---- status 语义 ---- */
+  --status-ok: var(--pal-ok);
+  --status-warn: var(--pal-warn);
+  --status-warn-strong: var(--pal-warn-strong); /* 匹配徽章深橙 */
+  --status-ok-badge: var(--pal-ok-badge);            /* 状态徽章绿底 */
+  --status-ok-badge-border: var(--pal-ok-badge-border); /* 状态徽章绿边 */
+  --status-err-badge-soft: var(--pal-err-badge-3);   /* 状态徽章红底柔 */
+  --status-err-badge-border-soft: var(--pal-err-badge-border-3); /* 红边柔 */
+  --status-paused: var(--pal-status-paused);   /* 暂停/取消金 */
+  --status-failed: var(--pal-status-failed);   /* 链路失败红 */
+  --status-pending: var(--pal-status-pending); /* 待处理浅蓝 */
+  --status-idle: var(--pal-text-10);           /* 离线/空闲点 */
+  --status-ok-glow: rgba(76, 175, 80, 0.4);    /* 在线点光晕 */
+  --status-warn-badge: var(--pal-warn-badge-1);        /* 警告徽章底 */
+  --status-warn-badge-border: var(--pal-warn-badge-border-1); /* 警告徽章边 */
+  --status-warn-badge-2: var(--pal-warn-badge-2);      /* 警告徽章底强 */
+  --status-warn-badge-border-2: var(--pal-warn-badge-border-2); /* 警告徽章边强 */
+  --info-hover-2: var(--pal-info-hover-2);     /* 主按钮 hover（次） */
+  --info-2: var(--pal-info-2);                 /* 信息浅蓝（诊断） */
+  --surface-stack: var(--pal-bg-29);           /* 错误堆栈底 */
+
+  /* ---- Pipeline 链路状态组（Agent 工作链路面板） ---- */
+  --pv-running: var(--info);
+  --pv-running-soft: rgba(86, 156, 214, 0.12);
+  --pv-running-soft-2: rgba(86, 156, 214, 0.25);
+  --pv-running-soft-3: rgba(86, 156, 214, 0.35);
+  --pv-running-border: rgba(86, 156, 214, 0.4);
+  --pv-paused: var(--status-paused);
+  --pv-paused-border: rgba(228, 212, 143, 0.4);
+  --pv-done: var(--code-sym-var);
+  --pv-done-soft: rgba(78, 201, 176, 0.1);
+  --pv-done-soft-2: rgba(78, 201, 176, 0.06);
+  --pv-done-border: rgba(78, 201, 176, 0.4);
+  --pv-done-border-2: rgba(78, 201, 176, 0.25);
+  --pv-failed: var(--status-failed);
+  --pv-failed-soft: rgba(234, 102, 104, 0.12);
+  --pv-failed-soft-2: rgba(234, 102, 104, 0.1);
+  --pv-failed-soft-3: rgba(234, 102, 104, 0.25);
+  --pv-failed-border: rgba(234, 102, 104, 0.4);
+  --pv-failed-border-2: rgba(234, 102, 104, 0.3);
+  --pv-pending: var(--status-pending);
+  --pv-pending-soft: rgba(139, 200, 234, 0.08);
+  --pv-pending-border: rgba(139, 200, 234, 0.3);
+  --status-err: var(--pal-err);
+  --status-err-strong: var(--pal-err-strong);
+  --status-err-soft: rgba(239, 83, 80, 0.12);      /* 错误底柔 */
+  --status-err-subtle: rgba(239, 83, 80, 0.15);    /* 错误底淡 */
+  --status-err-strong-bg: rgba(239, 83, 80, 0.22); /* 错误底强 */
+  --status-err-badge: var(--pal-err-badge-1);            /* 错误徽章底 */
+  --status-err-badge-border: var(--pal-err-badge-border-1); /* 错误徽章边 */
+  --status-err-badge-2: var(--pal-err-badge-2);          /* 错误徽章底强 */
+  --status-err-badge-border-2: var(--pal-err-badge-border-2); /* 错误徽章边强 */
+  --status-heat-1: var(--pal-heat-1);
+  --status-heat-2: var(--pal-heat-2);
+  --status-heat-3: var(--pal-heat-3);
+  --status-heat-4: var(--pal-heat-4);
+
+  /* ---- code 符号语义（大纲视图） ---- */
+  --code-sym-func: var(--pal-sym-func);   /* 函数/类名 */
+  --code-sym-var: var(--pal-sym-var);     /* 变量/常量 */
+  --code-sym-param: var(--pal-sym-param); /* 参数 */
+  --code-sym-interface: var(--pal-sym-interface); /* 接口紫 */
+  --code-sym-import: var(--pal-sym-import);       /* 导入浅蓝 */
+  --code-sym-field: var(--pal-sym-field);         /* 字段绿 */
+
+  /* ---- border / shadow ---- */
+  --border-default: var(--pal-bg-5);  /* 常规边框（与提升层同色值） */
+  --border-strong: var(--pal-info);   /* 强边框（聚焦） */
+  --shadow-drop: rgba(0, 0, 0, 0.6);  /* 下拉阴影 */
+  --shadow-soft: rgba(0, 0, 0, 0.25); /* 面板阴影柔 */
+  --shadow-panel: rgba(0, 0, 0, 0.5); /* 弹层阴影 */
+  --shadow-strong: rgba(0, 0, 0, 0.8); /* 输入弹层阴影强 */
+  --border-mid: var(--pal-bg-8);       /* 中等边框（大纲分隔/选中边） */
+  --border-current: var(--pal-text-1); /* 当前词标记白框 */
+  --mark-cjk: var(--pal-cjk-border);   /* 中文汉字标记框 */
+  --border-field: var(--pal-bg-18);    /* 输入区边 */
+  --border-ast: var(--pal-bg-23);      /* AST 节点边 */
+  --border-toolbar: #555;              /* 工具栏边 */
+  --border-guide: rgba(204, 204, 204, 0.12); /* 树引导线 */
+  --border-raised: var(--pal-bg-16);   /* 未选中终端卡边框 */
+  --overlay-mask: rgba(0, 0, 0, 0.5);  /* 全屏遮罩 */
+
+  /* ---- 档位：字号 ---- */
+  --fs-10: 10px; /* 辅助标签 */
+  --fs-11: 11px; /* 小标注 */
+  --fs-12: 12px; /* 次要 */
+  --fs-13: 13px; /* 正文 */
+  --fs-14: 14px; /* 强调 */
+  --fs-16: 16px; /* 小标题 */
+  --fs-18: 18px; /* 大标题 */
+
+  /* ---- 档位：圆角 ---- */
+  --radius-2: 2px;  /* 内嵌控件 */
+  --radius-4: 4px;  /* 小控件 */
+  --radius-6: 6px;  /* 默认卡片/按钮 */
+  --radius-8: 8px;  /* 大卡片 */
+  --radius-12: 12px; /* 弹窗 */
+
+  /* ---- 档位：间距 ---- */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+}
+
+/* ===== 构思核心（MirrorDoc）===== */
+.mirror-delete-inline {
+  background: rgba(255, 85, 85, 0.35) !important;
+  text-decoration: line-through !important;
+  color: #ff8a8a !important;
+}
+.mirror-delete-line {
+  border-left: 3px solid #ff5555 !important;
+  background: rgba(255, 85, 85, 0.12) !important;
+}

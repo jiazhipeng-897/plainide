@@ -1,0 +1,106 @@
+{
+  "javascript": {
+    "console.log": {
+      "prefix": "clg",
+      "body": ["console.log(${1:obj});", "$0"],
+      "description": "打印日志到控制台"
+    },
+    "function": {
+      "prefix": "fn",
+      "body": ["function ${1:name}(${2:params}) {", "\t${0}", "}"],
+      "description": "函数声明"
+    },
+    "arrow function": {
+      "prefix": "afn",
+      "body": ["const ${1:name} = (${2:params}) => {", "\t${0}", "}"],
+      "description": "箭头函数"
+    },
+    "import": {
+      "prefix": "imp",
+      "body": ["import ${1:module} from \"${2:path}\";", "$0"],
+      "description": "ES6 模块导入"
+    },
+    "destructure": {
+      "prefix": "des",
+      "body": ["const { ${1:prop} } = ${2:obj};", "$0"],
+      "description": "对象解构赋值"
+    },
+    "for loop": {
+      "prefix": "for",
+      "body": ["for (let ${1:i} = 0; ${1:i} < ${2:array}.length; ${1:i}++) {", "\t${0}", "}"],
+      "description": "标准 for 循环"
+    },
+    "if statement": {
+      "prefix": "ife",
+      "body": ["if (${1:condition}) {", "\t${0}", "}"],
+      "description": "if 条件判断"
+    },
+    "try catch": {
+      "prefix": "try",
+      "body": ["try {", "\t${0}", "} catch (${1:err}) {", "\t", "} finally {", "\t", "}"],
+      "description": "异常捕获"
+    },
+    "async function": {
+      "prefix": "async",
+      "body": ["async function ${1:name}(${2:params}) {", "\ttry {", "\t\t${0}", "\t} catch (err) {", "\t\tconsole.error(err)", "\t}", "}"],
+      "description": "async 异步函数"
+    },
+    "await": {
+      "prefix": "aw",
+      "body": ["const ${1:result} = await ${2:promise};", "$0"],
+      "description": "await 等待"
+    }
+  },
+  "python": {
+    "print": {
+      "prefix": "pr",
+      "body": ["print(${1:obj})", "$0"],
+      "description": "打印输出"
+    },
+    "function": {
+      "prefix": "def",
+      "body": ["def ${1:name}(${2:params}):", "\t${0}", ""],
+      "description": "定义函数"
+    },
+    "class": {
+      "prefix": "cls",
+      "body": ["class ${1:ClassName}:", "\tdef __init__(self, ${2:params}):", "\t\t${0}", ""],
+      "description": "定义类"
+    },
+    "for loop": {
+      "prefix": "for",
+      "body": ["for ${1:item} in ${2:iterable}:", "\t${0}", ""],
+      "description": "for in 循环"
+    },
+    "if statement": {
+      "prefix": "ife",
+      "body": ["if ${1:condition}:", "\t${0}", ""],
+      "description": "if 条件判断"
+    },
+    "try except": {
+      "prefix": "try",
+      "body": ["try:", "\t${0}", "except ${1:Exception} as e:", "\t", "finally:", "\t", ""],
+      "description": "异常捕获"
+    },
+    "import": {
+      "prefix": "imp",
+      "body": ["import ${1:module}", "$0"],
+      "description": "导入模块"
+    },
+    "main": {
+      "prefix": "main",
+      "body": ["if __name__ == \"__main__\":", "\t${0}", ""],
+      "description": "主函数入口"
+    },
+    "list comprehension": {
+      "prefix": "lc",
+      "body": ["[${1:item} for ${1:item} in ${2:iterable} if ${3:condition}]", "$0"],
+      "description": "列表推导式"
+    },
+    "with open": {
+      "prefix": "with",
+      "body": ["with open('${1:file}', '${2:r}') as f:", "\t${0:data} = f.read()", ""],
+      "description": "文件打开上下文管理器"
+    }
+  }
+}

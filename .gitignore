@@ -1,0 +1,36 @@
+﻿# ===== 依赖 =====
+node_modules/
+
+# ===== 构建产物 =====
+dist/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.python-venv/
+venv/
+
+# ===== 日志 =====
+*.log
+_dev_err.log
+_dev_out.log
+python/python.log
+
+# ===== 运行时生成 =====
+python/cache/
+.myide/
+file_list.json
+
+# ===== 环境 =====
+.env.local
+.env.*.local
+
+# ===== 临时目录 =====
+.release-tmp/
+.test-run/
+.preview/
+python/generated/
+
+# ===== 测试脚本 =====
+_*.py
+_*.json
