@@ -34,3 +34,11 @@ python/generated/
 # ===== 测试脚本 =====
 _*.py
 _*.json
+
+# ===== 核心源码（编译为 bin，不推） =====
+python/orchestrator/
+python/code_rag/
+python/agents/codeagent/
+
+# ===== release 目录（重复） =====
+release/
