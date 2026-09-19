@@ -1,4 +1,4 @@
-# 🧠 My Code IDE - 项目文档
+﻿# 🧠 My Code IDE - 项目文档
 
 ## 🚀 项目概览
 
